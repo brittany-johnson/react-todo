@@ -66,3 +66,30 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+Loggin my steps to create a blog post once the app is done: 
+
+npx create-react-app react-todo
+cd react-todo 
+yarn start 
+
+Downloaded the photoshop file of the design I'm referencing 
+
+Renamed `App-header` to `App-main` in `App.js` and `App.css`
+Changed <header> to <main>
+
+Changed the background color of `App-main` to match the design 
+
+Removed unneeded JSX like the logo, <p>, etc. All content between main, unneeded logo import, and delete logo file. 
+
+Look at design and break elements into component files
+
+Create `components` folder in /src. In it create `date.js` `todoItem.js` and `todoList.js`
+
+Create basic component boilerplate in each file to test that they were being imported and redered properly. 
+
+
+Todo data will be stored in an object called `todoItems`. This object will contain dates as properties and the values of those dates will be an array of objects containing the todo item as the property and the state of the todo item (true or false)
+
+
