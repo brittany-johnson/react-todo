@@ -89,7 +89,102 @@ Create `components` folder in /src. In it create `date.js` `todoItem.js` and `to
 
 Create basic component boilerplate in each file to test that they were being imported and redered properly. 
 
+Tried using `new Date()` to create a instance of the JS date object in `TodoList.js`, but was unsucessful at first becuase I was importing a component also named `Date` and rendering it in my `TodoList` componenet.
+This is the error I got: `TypeError: d.getMonth is not a function`. This looks like it was looking for the `getMonth` function from the `Date` component import. Time to rename my compoent to `CalendarDate`.
+
+I moved my `new Date` instance to `CalendarDate.js` and then create a `month`, `year`, and `day` variables using the methods on the `Date` object. 
+
+Then I create arrays for `months` and `days` becuase their methods return numbers from 0, which is perfect to retreive the text value from an array. 
+
+To make sure that my dates were correct, I added them to my component with curly braces.
+
+Next, I have to figure out how to update the calendar date when the foward and back buttons are pressed. 
+
+My first thought it to add 1 to months and days until you reach the last item of the array, then start at the back at the first item. The year I can also just add 1. The date is a little tricky since each month has different dates, and sometimes if its a leap year Febuary will be different as well. I could update everything else first and then the date last. The date could check the month and year and depending on the value, it would know whether to contiue or restart at 1. 
+
+I'll go with this idea for now and if I think of something better later, I'll try that. 
+
+First, I added the `onClick` attribute to my buttons and created functions that console.log so I could make sure that they were working.
+
+I then moved my month, year, day, and date variables into my componet and set my initial componenet state with them. I did this because I realized that when these values change, I want the CalendarDate component to rerender, so because of that, these values should be set in the componet's state. When a state value is used in the compoennt and is changed, the componenet rereders. 
+
+Next, I want to test updating the CalendarDate componenet when clicking the button. I used the navigateForwards function to alter the state of the month by using setState and adding 1 to state.month. 
+
+Because my month, year, date, and day values will increase, decrease and restart based on different rules, I think I would like to make seperate functions to handle the update of each properly.
+
+Can not go backwards from current present date
+
+First I'll start with the month:
+
+If this.state.month is 0 -> 
+    - navigateBackwards will return 11
+    - navigateForwards will += 1 
+If this.state.month is 1-10 -> 
+    - navigateBackwards will -= 1
+    - navigateForwards will += 1
+If this.state.month is 11 -> 
+    - navigateBackwards will -= 1
+    - navigateForwards will return 0
+
+Next I'll define cases for the year, day, and date:
+
+Year ->
+navigateForward += 1 
+navigateBackwards -= 1
+
+Day -> 
+Each month has either 28, 30, or 31 days. During a leap year an extra day is added to Feb. The day must check for the state of the month and the state of the year. Because there is now extra month data, I'm thinking of changing my months array into a months array of objects instead of an array of strings.
+
+I will also create an array for the leap years
+
+The value of Day must not be greater than 31
+
+
+Jan - 31
+Feb - 28 or 29
+March - 31
+April - 30
+May - 31
+June - 30
+July - 31 
+August - 31 
+Sep - 30
+Oct - 31
+Nov - 30 
+Dec - 31
+
+If this.state.date is 1
+    - navigateForward will += 1 [x]
+    - navigateBackwards will return 
+        - 31 if Jan, March, May, July, August, Oct, Dec [x]
+        - 30 if April, June, Sep, Nov [x]
+        - 29 if Feb && this.state.year is equal to leapYears[ i ]
+        - 28 if Feb [x]
+If this.state.date is 2-27 [x]
+    - navigateForward will += 1 [x]
+    - navigateBackwards will -= 1 [x]
+If this.state.date is 28 && this.state.month is Feb
+    - navigateForward will check if its a leap year
+        - leap year: += 1
+        - not leap year: return 1 
+    - navigateBackwards -= 1
+If this.state.date is 29 && this.state.month is Feb
+     - navigateForward return 1 
+     - navigateBackwards -= 1
+If this.state.date is 30 && month is April, June, Sep, Nove
+    - navigateForward return 1 
+    - navigateBackwards -= 1
+If this.state.date is 31 
+    - navigateForward return 1 
+    - navigateBackwards -= 1
+
+
+
+
+
 
 Todo data will be stored in an object called `todoItems`. This object will contain dates as properties and the values of those dates will be an array of objects containing the todo item as the property and the state of the todo item (true or false)
+
+
 
 

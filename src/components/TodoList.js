@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Date from './Date';
+import CalendarDate from './CalendarDate';
 import TodoItem from './TodoItem';
 
 class TodoList extends Component {
     render() {
         return(
             <div className="todoList">
-                <Date/>
+                <CalendarDate/>
                 <TodoItem/>
             </div>
         )

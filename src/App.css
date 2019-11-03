@@ -16,3 +16,8 @@
 .App-link {
   color: #09d3ac;
 }
+
+.cal-date {
+  flex-direction: row;
+  display: flex;
+}
