@@ -132,12 +132,12 @@ Year ->
 navigateForward += 1 
 navigateBackwards -= 1
 
-Day -> 
+Date -> 
 Each month has either 28, 30, or 31 days. During a leap year an extra day is added to Feb. The day must check for the state of the month and the state of the year. Because there is now extra month data, I'm thinking of changing my months array into a months array of objects instead of an array of strings.
 
 I will also create an array for the leap years
 
-The value of Day must not be greater than 31
+The value of Date must not be greater than 31
 
 
 Jan - 31
@@ -154,15 +154,15 @@ Nov - 30
 Dec - 31
 
 If this.state.date is 1
-    - navigateForward will += 1 [x]
+    - navigateForward will += 1 
     - navigateBackwards will return 
-        - 31 if Jan, March, May, July, August, Oct, Dec [x]
-        - 30 if April, June, Sep, Nov [x]
+        - 31 if Jan, March, May, July, August, Oct, Dec 
+        - 30 if April, June, Sep, Nov 
         - 29 if Feb && this.state.year is equal to leapYears[ i ]
-        - 28 if Feb [x]
-If this.state.date is 2-27 [x]
-    - navigateForward will += 1 [x]
-    - navigateBackwards will -= 1 [x]
+        - 28 if Feb 
+If this.state.date is 2-27 
+    - navigateForward will += 1 
+    - navigateBackwards will -= 1
 If this.state.date is 28 && this.state.month is Feb
     - navigateForward will check if its a leap year
         - leap year: += 1
@@ -178,10 +178,22 @@ If this.state.date is 31
     - navigateForward return 1 
     - navigateBackwards -= 1
 
+Now I'm translating all of the logic above into JS. I'm finding that my logic is very long winded, and messy. I don't like how long the checkDate function has become. 
+
+I've also run into a little road block that is making me think that I should rewrite this function and break it into smaller functions. Maybe one checking the month, and that is what is evaluated onClick and inside the checking the month function, call a function that handles the naviagation based on the date. 
+
+Possible order of checks: 
+
+- Going forward or backwards?
+    - This is checked when a button is clicked. I currently have two functions for each direction and they are being called on the appropriate button. 
+- What month is it? 
+    - I think i should be checking for this next because I can group the logic in a cleaner way. All of the months fall into 4 catgories based on the number of days they have. 
+- What date is it? 
 
 
+For the checkDate function I can pass in the number of days the month has. 
 
-
+*NEED TO UPDATE NOTES*
 
 Todo data will be stored in an object called `todoItems`. This object will contain dates as properties and the values of those dates will be an array of objects containing the todo item as the property and the state of the todo item (true or false)
 
