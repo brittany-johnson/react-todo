@@ -28,56 +28,6 @@ class CalendarDate extends Component {
         return a -= b;
     }
 
-    // checkDate(date, operation) {
-    //     let forward;
-    //     let backward;
-
-    //     operation === this.addToSelf ? forward = true : forward = false;
-    //     operation === this.subtractFromSelf ? backward = true : backward = false;
-
-    //     //if date is 1st
-    //     if (date === 1 && forward) {
-    //         this.setState((state) => ({
-    //             date: operation(state.date, 1)
-    //         }))
-    //     } else if (date === 1 && backward) {
-    //         if (this.state.month === 0 || 2 || 4 || 6 || 7 || 9 || 11) {
-    //             //Jan, March, May, July, August, Oct, Dec
-    //             this.setState((state) => ({
-    //                 date: 31
-    //             }))
-    //         } else if (this.state.month === 3 || 5 || 8 || 10) {
-    //             //April, June, Sep, Nov
-    //             this.setState((state) => ({
-    //                 date: 30
-    //             }))
-    //         } else if(this.state.month === 1) {
-    //             //Feb
-    //             this.setState((state) => ({
-    //                 date: 28
-    //             }))
-    //         }
-    //     }
-
-    //     //if date is 2nd through 27th
-    //     if (date >= 2 && date < 28) {
-    //         this.setState((state) => ({
-    //             date: operation(state.date, 1)
-    //         }))
-    //     }
-        
-    //     //febuary
-    //     if (date === 28 && this.state.month === 1 && forward) {
-    //         this.setState((state) => ({
-    //             date: 1
-    //         }))
-    //     } else if (date === 28 && this.state.month === 1 && backward) {
-    //         this.setState((state) => ({
-    //             date: operation(state.date, 1)
-    //         }))
-    //     }
-    // }
-
     checkMonth(month) {
         switch (month) {
             //Jan, March, May, July, August, Oct, Dec
@@ -90,7 +40,6 @@ class CalendarDate extends Component {
             case 11:
                 return 31;
                 // this.checkDate(31);
-                break;
             //April, June, Sep, Nov
             case 3:
             case 5: 
@@ -98,38 +47,19 @@ class CalendarDate extends Component {
             case 10:
                 return 30;
                 // this.checkDate(30);
-                break;
             //Feb
             case 1:
                 return 28;
                 // this.checkDate(28);
-                break;
         }
     }
 
-    checkDate() {
+    updateCalendarDate() {
         let currentDate = this.state.date;
         let currentMonth = this.state.month;
+        let currentDay = this.state.day;
+        let currentYear = this.state.year;
         let daysInMonth = this.checkMonth(this.state.month);
-        
-        if (this.state.direction === "forward" && currentDate === 1) {
-            this.setState({
-                date: this.addToSelf(currentDate, 1)
-            })
-        } 
-
-        // if (daysInMonth === 31 && this.state.direction === "forward") {
-        //     if (currentDate === daysInMonth) {
-        //         this.setState({
-        //             date: 1
-        //         })
-        //     }
-        //     this.setState({
-        //         date: this.addToSelf(currentDate, 1)
-        //     })
-        // } else if (daysInMonth === 31 && this.state.direction === "backwards") {
-
-        // }
         
         if (this.state.direction === "forward") {
             if (currentDate === daysInMonth && currentMonth === 11) {
@@ -144,7 +74,23 @@ class CalendarDate extends Component {
                 })
             } else {
                 this.setState(() => ({
-                    date: this.addToSelf(currentDate, 1)
+                    date: this.addToSelf(currentDate, 1),
+                }))
+            }
+
+            if (currentDay === 6) {
+                this.setState(() => ({
+                    day: 0,
+                }))
+            } else {
+                this.setState(() => ({
+                    day: this.addToSelf(currentDay, 1),
+                }))
+            }
+
+            if (currentMonth === 11 && currentDate === 31) {
+                this.setState(() => ({
+                    year: this.addToSelf(currentYear, 1)
                 }))
             }
         } 
@@ -158,23 +104,42 @@ class CalendarDate extends Component {
                     date: this.subtractFromSelf(currentDate, 1)
                 }))
             }
-        }
 
-        // if (daysInMonth === 28) {
-           
-        // }
+            if (currentDay === 0) {
+                this.setState(() => ({
+                    day: 6,
+                }))
+            } else {
+                this.setState(() => ({
+                    day: this.subtractFromSelf(currentDay, 1),
+                }))
+            }
+
+            if (currentMonth === 0 && currentDate === 1) {
+                this.setState(() => ({
+                    year: this.subtractFromSelf(currentYear, 1)
+                }))
+            }
+
+            if (currentDate === 1 && currentMonth === 0) {
+                this.setState(() => ({
+                    date: 31,
+                    month: 11
+                }))
+            }
+        }
     }
 
     navigateForwards() {
         this.setState({
             direction: "forward"
-        }, () => this.checkDate())
+        }, () => this.updateCalendarDate())
     }
 
     navigateBackwards() {
         this.setState({
             direction: "backwards"
-        }, () => this.checkDate())
+        }, () => this.updateCalendarDate())
     }
 
     render() {
@@ -192,13 +157,5 @@ class CalendarDate extends Component {
         )
     }
 }
-
-//app starts by displaying the current date 
-
-//pressing next button updates the date and updates the todo list
-
-//when you press the back button it goes to the previous day only if the previous day is greater than the present day (can't look at old todo lists)
-//when you press the forward button it goes to the next day 
-
 
 export default CalendarDate;
