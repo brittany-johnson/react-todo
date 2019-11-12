@@ -21,3 +21,12 @@
   flex-direction: row;
   display: flex;
 }
+
+.todo::after {
+  content: "";
+  display: inline-block;
+  border: 3px solid #09d3ac;
+  width: 25px;
+  height: 25px;
+  border-radius: 60%;
+}

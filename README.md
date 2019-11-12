@@ -68,7 +68,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
-Loggin my steps to create a blog post once the app is done: 
+# Logging my steps to create a blog post once the app is done: 
 
 npx create-react-app react-todo
 cd react-todo 
@@ -193,10 +193,17 @@ Possible order of checks:
 
 For the checkDate function I can pass in the number of days the month has. 
 
-*NEED TO UPDATE NOTES*
+# NEED TO UPDATE NOTES
 
 Todo data will be stored in an object called `todoItems`. This object will contain dates as properties and the values of those dates will be an array of objects containing the todo item as the property and the state of the todo item (true or false)
 
+
+
+when you click a todo item, the display for the item will change into a textbox
+
+if editing is true display the text box, if editing is false display the item
+
+create a functional component for the todo item and text box displays 
 
 
 

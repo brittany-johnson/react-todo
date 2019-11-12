@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import todoItems from '../data';
 let d = new Date();
 
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -20,11 +20,16 @@ class CalendarDate extends Component {
         this.navigateBackwards = this.navigateBackwards.bind(this);
     }
 
-    addToSelf (a, b) {
+    componentDidMount(){
+        this.addDateEntry();
+      }
+
+
+    addToSelf(a, b) {
         return a += b;
     }
 
-    subtractFromSelf (a, b) {
+    subtractFromSelf(a, b) {
         return a -= b;
     }
 
@@ -66,74 +71,83 @@ class CalendarDate extends Component {
                 this.setState({
                     date: 1,
                     month: 0
-                })
+                }, () => this.addDateEntry())
             } else if (currentDate === daysInMonth) {
                 this.setState({
                     date: 1,
                     month: this.addToSelf(currentMonth, 1)
-                })
+                }, () => this.addDateEntry())
             } else {
                 this.setState(() => ({
                     date: this.addToSelf(currentDate, 1),
-                }))
+                }), () => this.addDateEntry())
             }
 
             if (currentDay === 6) {
                 this.setState(() => ({
                     day: 0,
-                }))
+                }), () => this.addDateEntry())
             } else {
                 this.setState(() => ({
                     day: this.addToSelf(currentDay, 1),
-                }))
+                }), () => this.addDateEntry())
             }
 
             if (currentMonth === 11 && currentDate === 31) {
                 this.setState(() => ({
                     year: this.addToSelf(currentYear, 1)
-                }))
+                }), () => this.addDateEntry())
             }
         } 
         if (this.state.direction === "backwards") {
             if (currentDate === 1) {
                 this.setState(() => ({
                     month: this.subtractFromSelf(currentMonth, 1)
-                }), () => this.setState({date:  this.checkMonth(this.state.month)})) //set date to the daysInMonth of the updated month state
+                }), () => this.setState({date:  this.checkMonth(this.state.month)}), () => this.addDateEntry()) //set date to the daysInMonth of the updated month state
             } else {
                 this.setState(() => ({
                     date: this.subtractFromSelf(currentDate, 1)
-                }))
+                }), () => this.addDateEntry())
             }
 
             if (currentDay === 0) {
                 this.setState(() => ({
                     day: 6,
-                }))
+                }), () => this.addDateEntry())
             } else {
                 this.setState(() => ({
                     day: this.subtractFromSelf(currentDay, 1),
-                }))
+                }), () => this.addDateEntry())
             }
 
             if (currentMonth === 0 && currentDate === 1) {
                 this.setState(() => ({
                     year: this.subtractFromSelf(currentYear, 1)
-                }))
+                }), () => this.addDateEntry())
             }
 
             if (currentDate === 1 && currentMonth === 0) {
                 this.setState(() => ({
                     date: 31,
                     month: 11
-                }))
+                }), () => this.addDateEntry())
             }
         }
+    }
+
+    addDateEntry() {
+        let currentDate = `${this.state.day}${this.state.month}${this.state.date}${this.state.year}`;
+
+        this.props.getCurrentDate(currentDate);
+        // todoItems[currentDate] = ["thing1", "thing2", "thing3"];
     }
 
     navigateForwards() {
         this.setState({
             direction: "forward"
-        }, () => this.updateCalendarDate())
+        }, 
+        () => this.updateCalendarDate());
+        console.log(todoItems);
     }
 
     navigateBackwards() {
