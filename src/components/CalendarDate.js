@@ -44,18 +44,15 @@ class CalendarDate extends Component {
             case 9: 
             case 11:
                 return 31;
-                // this.checkDate(31);
             //April, June, Sep, Nov
             case 3:
             case 5: 
             case 8: 
             case 10:
                 return 30;
-                // this.checkDate(30);
             //Feb
             case 1:
                 return 28;
-                // this.checkDate(28);
         }
     }
 
@@ -139,7 +136,10 @@ class CalendarDate extends Component {
         let currentDate = `${this.state.day}${this.state.month}${this.state.date}${this.state.year}`;
 
         this.props.getCurrentDate(currentDate);
-        // todoItems[currentDate] = ["thing1", "thing2", "thing3"];
+
+        if (!todoItems[currentDate]) {
+            todoItems[currentDate] = [];
+        }
     }
 
     navigateForwards() {
@@ -147,7 +147,6 @@ class CalendarDate extends Component {
             direction: "forward"
         }, 
         () => this.updateCalendarDate());
-        console.log(todoItems);
     }
 
     navigateBackwards() {
