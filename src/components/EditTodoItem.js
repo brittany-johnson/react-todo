@@ -17,9 +17,10 @@ class EditTodoItem extends Component {
     }
     handleSave(event) {
         todoItems[this.props.date][this.props.id] = this.state.value;
+        this.props.editTodo(this.props.id);
     }
     handleCancel(event) {
-
+        this.props.editTodo(this.props.id);
     }
     render() {
         return (
@@ -28,7 +29,7 @@ class EditTodoItem extends Component {
                     <div>
                         <input type="text" value={this.state.value} onChange={this.handleChange}></input> 
                         <button onClick={this.handleSave}>Save</button>
-                        <button>Cancel</button>
+                        <button onClick={this.handleCancel}>Cancel</button>
                     </div>
                     : null
                 }

@@ -41,7 +41,7 @@ class TodoItem extends Component {
                     {this.state.items[this.props.date] &&
                         this.state.items[this.props.date].map((item, index) => {
                         if(this.state.inEditMode && this.state.clickedItem === index) {
-                            return <EditTodoItem id={index} todo={item} date={this.props.date} key={index}/>
+                            return <EditTodoItem id={index} todo={item} date={this.props.date} key={index} editTodo={this.editTodo.bind(this)}/>
                         }
                         else {
                             console.log(index);
