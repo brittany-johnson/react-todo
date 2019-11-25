@@ -1,4 +1,4 @@
-# View a live version of the app here: https://brittany-johnson.github.io/react-todo/
+## View a live version of the app here: https://brittany-johnson.github.io/react-todo/ (Currently in production)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
