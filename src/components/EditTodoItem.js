@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import todoItems from '../data';
+import styles from '../App.module.css';
 
 class EditTodoItem extends Component {
     constructor(props) {
@@ -27,9 +28,9 @@ class EditTodoItem extends Component {
             <div key={this.props.id}>
                 {this.props.todo ? 
                     <div>
-                        <input type="text" value={this.state.value} onChange={this.handleChange}></input> 
-                        <button onClick={this.handleSave}>Save</button>
-                        <button onClick={this.handleCancel}>Cancel</button>
+                        <input type="text" value={this.state.value} onChange={this.handleChange} className={styles.input}></input> 
+                        <button onClick={this.handleSave} className={styles.inputBtn}>Save</button>
+                        <button onClick={this.handleCancel} className={styles.inputBtn}>Cancel</button>
                     </div>
                     : null
                 }

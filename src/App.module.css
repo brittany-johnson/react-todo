@@ -1,0 +1,141 @@
+.app {
+  text-align: center;
+  font-family: Arial Black;
+}
+
+.appMain {
+  background-color: #f0efe9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #616473;
+}
+
+.todoList {
+  background-color: white;
+  box-shadow: 4px 6px 6px #dddcd8;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.calDate {
+  flex-direction: row;
+  display: flex;
+}
+
+.todo::after {
+  content: "";
+  display: inline-block;
+  border: 3px solid #09d3ac;
+  width: 25px;
+  height: 25px;
+  border-radius: 60%;
+}
+
+.navBtn {
+  border: none;
+  background-color: #50e3a4;
+  border-radius: 40px;
+  margin: 10px;
+  font-family: Arial Black;
+  border-radius: 50%;
+  outline: none;
+  transition: .5s;
+  width: 30px;
+  height: 30px;
+}
+
+.navBtn:hover {
+  background-color: #50e3a386;
+}
+
+.navBtnNext {
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+
+.date {
+  font-size: 2rem;
+}
+
+.monthYear {
+  font-size: 0.7rem;
+  margin-top: 7px;
+  margin-left: 7px;
+}
+
+.day {
+  margin-left: 10vw;
+  margin-top: 14px;
+}
+
+.newItem {
+  background-color: #50e3a4;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  transition: .5s;
+  outline: none;
+}
+
+.newItem:hover {
+  width: 75px;
+  height: 75px;
+}
+
+
+.todoItem {
+  list-style: none;
+  display: inline-block;
+  min-width: 18vw;
+  max-width: 18vw;
+  margin-right: 2rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.notDone {
+  display: inline-block;
+  box-shadow: 0 0 0 5px #50e3a4;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 1rem;
+}
+
+.done {
+  display: inline-block;
+  box-shadow: 0 0 0 5px #50e3a4;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 1rem;
+  background-color: #50e3a4;
+}
+
+.input {
+  font-family: Arial Black;
+  padding: .5rem;
+  font-size: 1rem;
+}
+
+.inputBtn {
+  background-color: #50e3a4;
+  border: none;
+  font-family: Arial Black;
+  margin: .5rem;
+  padding: .5rem;
+  font-size: 1rem;
+}
+
+.item {
+  display: flex;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import todoItems from '../data';
 import EditTodoItem from './EditTodoItem';
+import styles from '../App.module.css';
 
 class TodoItem extends Component {
 
@@ -10,13 +11,15 @@ class TodoItem extends Component {
             inEditMode: false,
             clickedItem: "", 
             items: todoItems,
+            isDone: [],
+            isNotDone: []
         }
         this.editTodo = this.editTodo.bind(this);
         this.createTodo = this.createTodo.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
     createTodo() {
-        console.log(todoItems)
         todoItems[this.props.date].push("Click here to edit"); 
         return this.updateData(todoItems);
     }
@@ -34,22 +37,56 @@ class TodoItem extends Component {
         }));
     }
 
+    handleCheckbox(todo) {
+        if (this.state.isDone.indexOf(todo) !== -1) {
+            this.setState(()=> ({
+                isDone: this.state.isDone.filter( item => item !== todo),
+                isNotDone: this.state.isNotDone.concat(todo)
+            }))
+        } else {
+            this.setState(() => ({
+                isDone: this.state.isDone.concat(todo),
+                isNotDone: this.state.isNotDone.filter( item => item !== todo),
+            }))
+        }
+    }
+
     render() {
         return(
             <div>
                 <ul className="todoItems">
                     {this.state.items[this.props.date] &&
-                        this.state.items[this.props.date].map((item, index) => {
+                    this.state.items[this.props.date].map((item, index) => {
                         if(this.state.inEditMode && this.state.clickedItem === index) {
-                            return <EditTodoItem id={index} todo={item} date={this.props.date} key={index} editTodo={this.editTodo.bind(this)}/>
+                            return (
+                                <EditTodoItem 
+                                    id={index} 
+                                    todo={item} 
+                                    date={this.props.date} 
+                                    key={index} 
+                                    editTodo={this.editTodo.bind(this)}
+                                />
+                            )
                         }
                         else {
-                            console.log(index);
-                            return <li key={index} onClick={() => this.editTodo(index)} >{item}</li>
+                            return (
+                                <div className={styles.item}>
+                                    <li 
+                                        key={index} 
+                                        className={styles.todoItem} 
+                                        onClick={() => this.editTodo(index)}>
+                                        {item}
+                                    </li>
+                                    <div 
+                                        className={this.state.isDone.indexOf(index) !== -1 ? styles.done : styles.notDone} 
+                                        onClick={() => this.handleCheckbox(index)}>    
+                                    </div>
+                                </div>
+                            )
                         }
                     })}              
                 </ul>
-                <button onClick={this.createTodo}>+</button>
+                <button onClick={this.createTodo} className={styles.newItem}>+</button>
             </div>
         )
     }

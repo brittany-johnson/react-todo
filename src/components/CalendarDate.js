@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import todoItems from '../data';
+import styles from '../App.module.css';
 let d = new Date();
 
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -157,15 +158,19 @@ class CalendarDate extends Component {
 
     render() {
         return(
-            <div className="cal-date">
-                <button className="back" onClick={this.navigateBackwards}></button>
-                <div className="date">{this.state.date}</div>
-                <div className="month-year">
-                    <div className="month">{months[this.state.month]}</div>
-                    <div className="year">{this.state.year}</div>
+            <div className={styles.calDate}>
+                <button onClick={this.navigateBackwards} className={styles.navBtn}>
+                    {"<"}
+                </button>
+                <div className={styles.date}>{this.state.date}</div>
+                <div className={styles.monthYear}>
+                    <div className={styles.month}>{months[this.state.month]}</div>
+                    <div className={styles.year}>{this.state.year}</div>
                 </div>
-                <div className="day">{days[this.state.day]}</div>
-                <button className="forward" onClick={this.navigateForwards}></button>
+                <div className={styles.day}>{days[this.state.day]}</div>
+                <button onClick={this.navigateForwards} className={styles.navBtn}>
+                {">"}
+                </button>
             </div>
         )
     }
