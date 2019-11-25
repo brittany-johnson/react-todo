@@ -26,15 +26,7 @@
 .calDate {
   flex-direction: row;
   display: flex;
-}
-
-.todo::after {
-  content: "";
-  display: inline-block;
-  border: 3px solid #09d3ac;
-  width: 25px;
-  height: 25px;
-  border-radius: 60%;
+  justify-content: space-around;
 }
 
 .navBtn {
@@ -51,13 +43,7 @@
 }
 
 .navBtn:hover {
-  background-color: #50e3a386;
-}
-
-.navBtnNext {
-  background-repeat: no-repeat;
-  width: 100px;
-  height: 100px;
+  background-color: #3eac7c;
 }
 
 .date {
@@ -66,13 +52,13 @@
 
 .monthYear {
   font-size: 0.7rem;
-  margin-top: 7px;
+  margin-top: 1vh;
   margin-left: 7px;
 }
 
 .day {
   margin-left: 10vw;
-  margin-top: 14px;
+  margin-top: 1vh;
 }
 
 .newItem {
@@ -102,11 +88,12 @@
   margin-bottom: 1.5rem;
 }
 
+
 .notDone {
   display: inline-block;
   box-shadow: 0 0 0 5px #50e3a4;
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   margin-left: 1rem;
 }
@@ -114,8 +101,8 @@
 .done {
   display: inline-block;
   box-shadow: 0 0 0 5px #50e3a4;
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   margin-left: 1rem;
   background-color: #50e3a4;
@@ -125,6 +112,7 @@
   font-family: Arial Black;
   padding: .5rem;
   font-size: 1rem;
+  outline-color :#50e3a4;
 }
 
 .inputBtn {
@@ -136,6 +124,27 @@
   font-size: 1rem;
 }
 
+.inputBtn:hover {
+  background-color: #3eac7c;
+}
+
 .item {
   display: flex;
+}
+
+@media only screen and (max-width: 1200px) {
+  .todoItem {
+    max-width: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .inputBtn {
+    display: block;
+    width: 50vw;
+  }
+  .todoItem {
+    min-width: 40vw;
+    max-width: 40vw;
+  }
 }
