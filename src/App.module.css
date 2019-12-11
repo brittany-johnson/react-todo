@@ -42,7 +42,7 @@
   height: 30px;
 }
 
-.navBtn:hover {
+.navBtn:hover, .navBtn:focus {
   background-color: #3eac7c;
 }
 
@@ -72,7 +72,7 @@
   outline: none;
 }
 
-.newItem:hover {
+.newItem:hover, .newItem:focus {
   width: 75px;
   height: 75px;
 }
@@ -96,6 +96,7 @@
   height: 1.5rem;
   border-radius: 50%;
   margin-left: 1rem;
+  border: none;
 }
 
 .done {
@@ -106,6 +107,7 @@
   border-radius: 50%;
   margin-left: 1rem;
   background-color: #50e3a4;
+  border: none;
 }
 
 .input {
@@ -124,7 +126,7 @@
   font-size: 1rem;
 }
 
-.inputBtn:hover {
+.inputBtn:hover,  .inputBtn:focus{
   background-color: #3eac7c;
 }
 

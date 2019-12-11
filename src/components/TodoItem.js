@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Mousetrap from 'mousetrap';
 import todoItems from '../data';
 import EditTodoItem from './EditTodoItem';
 import styles from '../App.module.css';
@@ -17,6 +18,12 @@ class TodoItem extends Component {
         this.editTodo = this.editTodo.bind(this);
         this.createTodo = this.createTodo.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
+    }
+    componentDidMount() {
+        Mousetrap.bind('space', this.createTodo); 
+    }
+    componentWillUnmount() {
+        Mousetrap.unbind('space', this.createTodo);
     }
 
     createTodo() {
@@ -74,13 +81,14 @@ class TodoItem extends Component {
                                     <li 
                                         key={index} 
                                         className={styles.todoItem} 
+                                        tabIndex = "0"
                                         onClick={() => this.editTodo(index)}>
                                         {item}
                                     </li>
-                                    <div 
+                                    <button 
                                         className={this.state.isDone.indexOf(index) !== -1 ? styles.done : styles.notDone} 
                                         onClick={() => this.handleCheckbox(index)}>    
-                                    </div>
+                                    </button>
                                 </div>
                             )
                         }

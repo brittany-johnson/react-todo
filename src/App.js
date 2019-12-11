@@ -2,8 +2,6 @@ import React from 'react';
 import TodoList from './components/TodoList';
 import styles from './App.module.css';
 
-console.log(styles);
-
 function App() {
   return (
     <div className={styles.app}>

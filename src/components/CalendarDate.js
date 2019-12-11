@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Mousetrap from 'mousetrap';
 import todoItems from '../data';
 import styles from '../App.module.css';
 let d = new Date();
@@ -23,8 +24,13 @@ class CalendarDate extends Component {
 
     componentDidMount(){
         this.addDateEntry();
-      }
-
+        Mousetrap.bind('right', this.navigateForwards);
+        Mousetrap.bind('left', this.navigateBackwards);
+    }
+    componentWillUnmount() {
+        Mousetrap.unbind('right', this.navigateForwards);
+        Mousetrap.unbind('left', this.navigateBackwards);
+    }
 
     addToSelf(a, b) {
         return a += b;
